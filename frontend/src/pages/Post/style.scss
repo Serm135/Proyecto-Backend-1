@@ -1,0 +1,17 @@
+
+.post {
+
+  &__img {
+    max-width: 100%;
+  }
+
+  &__timestamp {
+    text-align: center;
+    color: rgb(var(--color-background-secondary))
+  }
+
+  &__no-reviews {
+    text-align: center;
+    color: rgb(var(--color-background-secondary))
+  }
+}

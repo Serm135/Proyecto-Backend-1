@@ -1,0 +1,34 @@
+
+.profile {
+
+  &__name {
+
+  }
+
+  &__username {
+    color: rgb(var(--color-background-secondary))
+  }
+
+  &__bio {
+
+  }
+
+  &__posts {
+    display: flex;
+  }
+}
+
+@media all and (min-width: 700px) {
+  .profile {
+    &__buttons {
+      display: flex;
+      grid-gap: 10px;
+    }
+
+    &__posts {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
+}

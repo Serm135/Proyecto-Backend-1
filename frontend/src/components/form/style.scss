@@ -1,0 +1,32 @@
+
+.smart-form {
+  &__body, &__fetching {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.2s;
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+  }
+
+  &__fetching {
+    &.visible {
+      height: 100px;
+    }
+  }
+
+  &__body {
+
+    &.visible {
+      height: var(--form-height);
+    }
+  }
+}
+
+@media all and (min-width: 700px) {
+  .smart-form {
+    &__body, &__fetching {
+      max-width: 400px;
+    }
+  }
+}

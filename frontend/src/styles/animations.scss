@@ -1,0 +1,30 @@
+
+.animate-enlarge {
+  animation: 3s animation-enlarge infinite;
+  animation-delay: var(--anim-delay);
+}
+
+@keyframes animation-enlarge {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.5);
+  }
+  20% {
+    transform: scale(1);
+  }
+}
+
+.animate-spin {
+  animation: 1s animation-spin infinite linear;
+}
+
+@keyframes animation-spin {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}

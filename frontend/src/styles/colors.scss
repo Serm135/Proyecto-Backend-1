@@ -1,0 +1,18 @@
+
+#root {
+  --color-foreground: 17, 24, 39;
+  --color-foreground-secondary: 42, 56, 85;
+  --color-background-secondary: 175, 173, 168;
+  --color-background: 243, 244, 246;
+  --user-font-scale: 1rem;
+  --rainbow-1: 99, 43, 243;
+  --rainbow-2: 241, 34, 200;
+  --rainbow-3: 241, 96, 34;
+  --rainbow-4: 158, 243, 69;
+  --rainbow-5: 68, 211, 243;
+  --color-fail: 238, 50, 50;
+  --color-success: 79, 196, 33;
+  background-color: rgb(var(--color-background));
+  min-height: 100vh;
+}
+

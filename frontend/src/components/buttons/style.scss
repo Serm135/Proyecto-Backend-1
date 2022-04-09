@@ -1,0 +1,61 @@
+
+button {
+  cursor: pointer;
+  min-width: 200px;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  transition: 0.1s;
+  max-width: 400px;
+  width: 100%;
+  height: 50px;
+}
+
+button.tertiary {
+  background-color: transparent;
+  color: rgb(var(--color-foreground));
+  text-decoration: underline;
+  padding: 0;
+  margin: 0;
+
+  &:hover {
+    color: rgb(var(--rainbow-2));
+  }
+}
+
+button.rounded {
+  border-radius: 50px;
+}
+
+button.regular {
+  border-radius: 5px;
+}
+
+button.primary {
+  background-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+
+  &:hover {
+    background-color: rgb(var(--color-foreground), 0.9);
+  }
+}
+
+button.secondary {
+  background-color: rgb(var(--color-background));
+  border: 2px solid rgb(var(--color-foreground), 0.8);
+  color: rgb(var(--color-foreground), 0.8);
+
+  &:hover {
+    background-color: rgb(var(--color-foreground), 0.1);
+  }
+}
+
+button.cta {
+  min-width: 0;
+}
+
+button.color-green {
+  background-color: rgb(var(--color-success)) !important;
+}

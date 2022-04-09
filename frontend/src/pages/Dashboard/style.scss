@@ -1,0 +1,29 @@
+
+.no-auth-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .subtitle {
+    margin: 2rem 0;
+  }
+}
+
+.auth-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__no-items {
+    text-align: center;
+    color: rgb(var(--color-background-secondary))
+  }
+}
+
+@media all and (min-width: 700px) {
+  .auth-dashboard {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
