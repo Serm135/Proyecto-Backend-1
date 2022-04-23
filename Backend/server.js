@@ -12,7 +12,7 @@ const mongoose = require('mongoose')
 mongoose.connect(
     "mongodb+srv://pinilloss:proyectoback@cluster0.49scg.mongodb.net/cadito-db?retryWrites=true&w=majority"
     ).then(()=>{
-        console.log('Success')
+        console.log('Connection is ok')
     }).catch((e)=>{
         console.log(e)
     })

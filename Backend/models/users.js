@@ -5,14 +5,14 @@ const User = require('./../schemas/users_schema');
 router.post('/register',async (req,res) => {
     const data = req.body
     console.log(data)
-    if (data) {
+    if (data!='') {
         const newuser = new User({
             name: req.body.display_name,
             username: req.body.username,
             password: req.body.password
         })
-        newuser.save().then(result =>{
-            console.log(result)
+        await newuser.save().then(result =>{
+            console.log("Éxito "+result)
             res.status(201).json({
                 message:"Operación realizada con éxito"
             })
@@ -23,16 +23,35 @@ router.post('/register',async (req,res) => {
             })
         })
     }else{
-        res.status(404).json({message:'No Content'})
+        res.status(500).json({message:'No Content'})
     }
 });
 
 router.post('/login',async (req,res) => {
     const data = req.body
-    if (data) {
-        res.status(200).json(data)
+    console.log(data)
+    if (data.username!='' && data.password!='') {
+        User.find({username:req.body.username,password: req.body.password},function(e,data){
+            if(e){
+                console.log(e)
+                res.status(500).json({
+                    error:e
+                })
+            }else{
+                if(data!=''){
+                    console.log("Éxito "+data)
+                    res.status(201).json({
+                    message:"Operación realizada con éxito"
+                    })
+                }else{
+                    res.status(404).json({
+                    error:"No se encontró el usuario"
+                    })
+                }
+            }
+        })
     }else{
-        res.status(404).json({message:'No Content'})
+        res.status(500).json({message:'No Content'})
     }
 });
 
