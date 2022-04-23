@@ -31,7 +31,7 @@ router.post('/login',async (req,res) => {
     const data = req.body
     console.log(data)
     if (data.username!='' && data.password!='') {
-        User.find({username:req.body.username,password: req.body.password},function(e,data){
+        User.find({username:data.username,password: data.password},function(e,data){
             if(e){
                 console.log(e)
                 res.status(500).json({
@@ -40,9 +40,7 @@ router.post('/login',async (req,res) => {
             }else{
                 if(data!=''){
                     console.log("Éxito "+data)
-                    res.status(201).json({
-                    message:"Operación realizada con éxito"
-                    })
+                    res.status(201).send(data)
                 }else{
                     res.status(404).json({
                     error:"No se encontró el usuario"
@@ -57,15 +55,54 @@ router.post('/login',async (req,res) => {
 
 router.post('/prev-login',async (req,res) => {
     const data = req.body
-    if (data) {
-        res.status(200).json(data)
+    console.log(data)
+    if (data.user_id!='') {
+        User.find({_id:data.user_id},function(e,data){
+            if(e){
+                console.log(e)
+                res.status(500).json({
+                    error:e
+                })
+            }else{
+                if(data!=''){
+                    console.log("Éxito "+data)
+                    res.send(data)
+                }else{
+                    res.status(404).json({
+                    error:"No se encontró el usuario"
+                    })
+                }
+            }
+        })
     }else{
-        res.status(404).json({message:'No Content'})
+        res.status(500).json({message:'No Content'})
     }
 });
 
 router.get('/',async (req,res) => {
-    res.status(200).json(req.query.user_id)
+    const data = req.query
+    console.log(data)
+    if (data.user_id!='') {
+        User.find({_id:data.user_id},function(e,data){
+            if(e){
+                console.log(e)
+                res.status(500).json({
+                    error:e
+                })
+            }else{
+                if(data!=''){
+                    console.log("Éxito "+data)
+                    res.status(201).send(data)
+                }else{
+                    res.status(404).json({
+                    error:"No se encontró el usuario"
+                    })
+                }
+            }
+        })
+    }else{
+        res.status(500).json({message:'No Content'})
+    }
 });
 
 module.exports = router;
