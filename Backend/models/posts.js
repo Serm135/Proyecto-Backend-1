@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/recent',async (req,res) => {
-    console.log("entra")
+    //console.log("entra")
     res.status(200)
 });
 
