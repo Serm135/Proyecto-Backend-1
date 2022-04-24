@@ -1,26 +1,86 @@
 const express = require('express');
 const router = express.Router();
+const Post = require('./../schemas/posts_schema');
 
 router.get('/recent',async (req,res) => {
-    //console.log("entra")
-    res.status(200)
+    Post.find().sort({date: -1}).limit(10).exec(function(err, post) { 
+        console.log(post)
+        res.send(post)
+     });
+    
 });
 
 router.get('/',async (req,res) => {
-    if(req.query.user_id){
-        res.status(200)
-    }else if(req.query.post_id){
-        res.status(200)
+    const data = req.query
+    console.log(data)
+    if(data.user_id){
+        const pipeline=[
+            {$match:{owner_id:data.user_id}},
+            {$lookup:{
+                from:"users",
+                localField:"owner_id",
+                foreignField:"_id",
+                as:"Userposts"
+            }}
+        ];
+        await Post.aggregate(pipeline).then(data=>{
+            console.log(data)
+            if(data!=''){
+                res.status(200).send(data)
+            }else{
+                res.status(404).json("Nada que mostrar")
+            }
+        })
+        
+        
+    }else if(data.post_id){
+        if (data.post_id!='') {
+            await Post.find({_id:data.post_id}).then(data=>{
+                console.log(data)
+                if(data!=''){
+                    res.status(201).send(data)
+                }else{
+                    res.status(404).json("No se encontró el post")
+                }
+            }).catch(e=>{
+                console.log(e)
+                res.status(500).json({
+                    error:e
+                })
+            })
+        }else{
+            res.status(500).json({message:'No Content'})
+        }
+    }else{
+        res.status(500).json({message:'No Content'})
     }
 });
 
 router.post('/',async (req,res) => {
     const data = req.body
-    if (data) {
-        console.log(data)
-        res.status(200).json(data)
+    const todayDate = new Date().toISOString().slice(0, 10);
+    if (data!='') {
+        const newpost = new Post({
+            owner_id: req.body.owner_id,
+            img_url: req.body.img_url,
+            name: req.body.display_name,
+            description: req.body.description,
+            price: req.body.price,
+            date: todayDate
+        })
+        await newpost.save().then(result =>{
+            console.log("Éxito "+result)
+            res.status(201).json({
+                message:"Operación realizada con éxito"
+            })
+        }).catch(e=>{
+            console.log(e)
+            res.status(500).json({
+                error:e
+            })
+        })
     }else{
-        res.status(404).json({message:'No Content'})
+        res.status(500).json({message:'No Content'})
     }
 });
 

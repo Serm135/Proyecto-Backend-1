@@ -31,22 +31,18 @@ router.post('/login',async (req,res) => {
     const data = req.body
     console.log(data)
     if (data.username!='' && data.password!='') {
-        User.find({username:data.username,password: data.password},function(e,data){
-            if(e){
-                console.log(e)
-                res.status(500).json({
-                    error:e
-                })
+        await User.find({username:data.username,password: data.password}).then(data=>{
+            console.log(data)
+            if(data!=''){
+                res.status(201).send(data)
             }else{
-                if(data!=''){
-                    console.log("Éxito "+data)
-                    res.status(201).send(data)
-                }else{
-                    res.status(404).json({
-                    error:"No se encontró el usuario"
-                    })
-                }
+                res.status(404).json("No se encontró el usuario")
             }
+        }).catch(e=>{
+            console.log(e)
+            res.status(500).json({
+                error:e
+            })
         })
     }else{
         res.status(500).json({message:'No Content'})

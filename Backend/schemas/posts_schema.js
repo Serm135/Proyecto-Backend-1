@@ -6,7 +6,8 @@ let postsSchema = new Schema({
     img_url:{type: String, required: true},
     name:{type: String, required: true},
     description:{type: String, required: true},
-    price:{type: Number, required: true}
+    price:{type: Number, required: true},
+    date:{type:String, required:true}
 },{versionKey:false})
 
 let Post = mongoose.model('Posts',postsSchema)
