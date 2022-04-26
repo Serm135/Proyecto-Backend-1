@@ -194,7 +194,7 @@ export const fetchReviews = async ({url, params}) => {
     if (!url) {
         return fetchReviewsMock({product_id, user_id})
     } else {
-        return axios.delete(
+        return axios.get(
             `${url}/reviews/`,
             {params: {product_id, user_id}}
         )

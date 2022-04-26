@@ -66,7 +66,7 @@ router.post('/',async (req,res) => {
 router.delete('/',async (req,res) => {
     const data = req.query
     if(data.item_id!=''){
-        Cart.find({products:data.item_id}).then(dato=>{
+        await Cart.find({products:data.item_id}).then(dato=>{
             console.log(dato)
             if(dato!=''){
                 Cart.findOneAndUpdate({products:data.item_id},{$pull:{products:data.item_id}}).then(
@@ -92,7 +92,7 @@ router.delete('/',async (req,res) => {
 router.post('/buy',async (req,res) => {
     const data = req.body
     if (data.user_id!='') {
-        Cart.find({user_id:data.user_id}).then(dato=>{
+        await Cart.find({user_id:data.user_id}).then(dato=>{
             console.log(dato)
             if(dato!=''){
                 Cart.deleteOne({user_id:data.user_id}).then(

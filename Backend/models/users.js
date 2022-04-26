@@ -77,27 +77,22 @@ router.post('/prev-login',async (req,res) => {
 
 router.get('/',async (req,res) => {
     const data = req.query
-    console.log(data)
-    if (data.user_id!='') {
-        User.find({_id:data.user_id},function(e,data){
-            if(e){
-                console.log(e)
-                res.status(500).json({
-                    error:e
-                })
+    if(data.user_id!=''){
+        await User.find({_id:data.user_id}).then(data=>{
+            console.log(data)
+            if(data!=''){
+                res.status(201).send(data)
             }else{
-                if(data!=''){
-                    console.log("Éxito "+data)
-                    res.status(201).send(data)
-                }else{
-                    res.status(404).json({
-                    error:"No se encontró el usuario"
-                    })
-                }
+                res.status(404).json("No se encontró el usuario")
             }
+        }).catch(e=>{
+            console.log(e)
+            res.status(500).json({
+                error:e
+            })
         })
     }else{
-        res.status(500).json({message:'No Content'})
+        res.status(404).json("No se ingresó userID")
     }
 });
 
