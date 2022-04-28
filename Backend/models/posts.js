@@ -31,8 +31,6 @@ router.get('/',async (req,res) => {
                 res.status(404).json("Nada que mostrar")
             }
         })
-        
-        
     }else if(data.post_id){
         if (data.post_id!='') {
             await Post.find({_id:data.post_id}).then(data=>{

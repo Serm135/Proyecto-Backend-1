@@ -38,7 +38,7 @@ router.get('/',async (req,res) => {
             if(data!=''){
                 res.status(201).send(data)
             }else{
-                res.status(404).json("No se encontró el usuario o el producto")
+                res.status(404).json("No se encontró el usuario")
             }
         }).catch(e=>{
             console.log(e)
@@ -47,12 +47,14 @@ router.get('/',async (req,res) => {
             })
         })
     }else if(data.product_id){
+        console.log("Data:")
+        console.log(data)
         await Review.find({product_id:data.product_id}).then(data=>{
             console.log(data)
             if(data!=''){
                 res.status(201).send(data)
             }else{
-                res.status(404).json("No se encontró el usuario o el producto")
+                res.status(201).send([])
             }
         }).catch(e=>{
             console.log(e)
