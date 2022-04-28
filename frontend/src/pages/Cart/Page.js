@@ -35,7 +35,7 @@ const Page = () => {
         } else {
             navigate('/')
         }
-    }, [])
+    }, [API_URL])
 
     if (!cartData) {
         return <Spinner text={'Loading cart...'}/>

@@ -12,7 +12,7 @@ export const apiSlice = createSlice({
             localStorage.setItem('backend_url', action.payload);
             state.url = action.payload
         },
-        getURL: (state) => {
+        loadURL: (state) => {
             if (!state.url) {
                 state.url = localStorage.getItem('backend_url');
             }
@@ -20,7 +20,7 @@ export const apiSlice = createSlice({
     },
 })
 
-export const {setURL} = apiSlice.actions
+export const {setURL, loadURL} = apiSlice.actions
 
 export const getUrl = (state) => state.api.url
 

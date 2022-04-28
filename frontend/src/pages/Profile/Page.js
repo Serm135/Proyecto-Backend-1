@@ -13,12 +13,12 @@ import {Review} from "../../components/review";
 const Page = () => {
     const params = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const API_URL = useSelector(getUrl);
     const [userPosts, setUserPosts] = React.useState(undefined);
     const [userReviews, setUserReviews] = React.useState(undefined);
     const [userData, setUserData] = React.useState(undefined);
     const currentUser = useSelector(getUser);
-    const navigate = useNavigate();
 
     React.useEffect(() => {
         const fetch = async () => {
@@ -32,7 +32,7 @@ const Page = () => {
             setUserReviews(reviews)
         }
         fetch()
-    }, [])
+    }, [API_URL])
 
     if (!userData) {
         return <Spinner

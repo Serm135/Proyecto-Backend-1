@@ -6,11 +6,13 @@ router.post('/',async (req,res) => {
     const data = req.body
     console.log(data)
     if (data!='') {
+        const todayDate = new Date().toISOString().slice(0, 10);
         const newreview = new Review({
             user_id: req.body.user_id,
             product_id: req.body.product_id,
             rating: req.body.rating,
-            description: req.body.description
+            description: req.body.description,
+            created_date: todayDate
         })
         await newreview.save().then(result =>{
             console.log("Éxito "+result)
@@ -30,8 +32,8 @@ router.post('/',async (req,res) => {
 
 router.get('/',async (req,res) => {
     const data = req.query
-    if(data.user_id!='' && data.product_id!=''){
-        await Review.find({product_id:data.product_id,user_id:data.user_id}).then(data=>{
+    if(data.user_id){
+        await Review.find({user_id:data.user_id}).then(data=>{
             console.log(data)
             if(data!=''){
                 res.status(201).send(data)
@@ -44,8 +46,20 @@ router.get('/',async (req,res) => {
                 error:e
             })
         })
-    }else{
-        res.status(404).json("No se ingresó userID o productID")
+    }else if(data.product_id){
+        await Review.find({product_id:data.product_id}).then(data=>{
+            console.log(data)
+            if(data!=''){
+                res.status(201).send(data)
+            }else{
+                res.status(404).json("No se encontró el usuario o el producto")
+            }
+        }).catch(e=>{
+            console.log(e)
+            res.status(500).json({
+                error:e
+            })
+        })
     }
 });
 

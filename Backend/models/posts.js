@@ -38,7 +38,7 @@ router.get('/',async (req,res) => {
             await Post.find({_id:data.post_id}).then(data=>{
                 console.log(data)
                 if(data!=''){
-                    res.status(201).send(data)
+                    res.status(201).send(data[0])
                 }else{
                     res.status(404).json("No se encontró el post")
                 }
@@ -63,10 +63,10 @@ router.post('/',async (req,res) => {
         const newpost = new Post({
             owner_id: req.body.owner_id,
             img_url: req.body.img_url,
-            name: req.body.display_name,
+            display_name: req.body.display_name,
             description: req.body.description,
             price: req.body.price,
-            date: todayDate
+            created_date: todayDate
         })
         await newpost.save().then(result =>{
             console.log("Éxito "+result)

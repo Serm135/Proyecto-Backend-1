@@ -34,7 +34,7 @@ const Page = () => {
         } else {
             navigate('/')
         }
-    }, [])
+    }, [API_URL])
 
     if (!historyData) {
         return <Spinner text={'Loading history...'}/>

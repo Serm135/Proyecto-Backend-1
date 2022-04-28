@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let usersSchema = new Schema({
-    name:{type: String, required: true},
+    display_name:{type: String, required: true},
     username:{type: String, required: true},
     password:{type: String, required: true}
 },{versionKey:false})
