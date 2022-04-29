@@ -38,7 +38,7 @@ router.get('/',async (req,res) => {
             if(data!=''){
                 res.status(201).send(data)
             }else{
-                res.status(404).json("No se encontró el usuario")
+                res.status(201).send([])
             }
         }).catch(e=>{
             console.log(e)

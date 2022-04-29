@@ -4,6 +4,7 @@ const User = require('./../schemas/users_schema');
 
 router.post('/register',async (req,res) => {
     const data = req.body
+    console.log("Register")
     console.log(data)
     if (data!='') {
         const newuser = new User({
@@ -13,9 +14,7 @@ router.post('/register',async (req,res) => {
         })
         await newuser.save().then(result =>{
             console.log("Éxito "+result)
-            res.status(201).json({
-                message:"Operación realizada con éxito"
-            })
+            res.status(201).send(result)
         }).catch(e=>{
             console.log(e)
             res.status(500).json({
@@ -29,6 +28,7 @@ router.post('/register',async (req,res) => {
 
 router.post('/login',async (req,res) => {
     const data = req.body
+    console.log("Login")
     console.log(data)
     if (data.username!='' && data.password!='') {
         await User.find({username:data.username,password: data.password}).then(data=>{
@@ -36,7 +36,7 @@ router.post('/login',async (req,res) => {
             if(data!=''){
                 res.status(201).send(data[0])
             }else{
-                res.status(404).json("No se encontró el usuario")
+                res.status(404).send([])
             }
         }).catch(e=>{
             console.log(e)
@@ -51,6 +51,7 @@ router.post('/login',async (req,res) => {
 
 router.post('/prev-login',async (req,res) => {
     const data = req.body
+    console.log("Prev-Login")
     console.log(data)
     if (data.user_id!='') {
         User.find({_id:data.user_id},function(e,data){
@@ -63,10 +64,6 @@ router.post('/prev-login',async (req,res) => {
                 if(data!=''){
                     console.log("Éxito "+data)
                     res.send(data[0])
-                }else{
-                    res.status(404).json({
-                    error:"No se encontró el usuario"
-                    })
                 }
             }
         })
@@ -77,13 +74,14 @@ router.post('/prev-login',async (req,res) => {
 
 router.get('/',async (req,res) => {
     const data = req.query
+    console.log("Get/")
     if(data.user_id!=''){
         await User.find({_id:data.user_id}).then(data=>{
             console.log(data)
             if(data!=''){
                 res.status(201).send(data[0])
             }else{
-                res.status(404).json("No se encontró el usuario")
+                res.status(404).send([])
             }
         }).catch(e=>{
             console.log(e)

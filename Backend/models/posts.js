@@ -14,6 +14,7 @@ router.get('/',async (req,res) => {
     const data = req.query
     console.log(data)
     if(data.user_id){
+        console.log("Get UserID")
         const pipeline=[
             {$match:{owner_id:data.user_id}},
             {$lookup:{
@@ -28,7 +29,7 @@ router.get('/',async (req,res) => {
             if(data!=''){
                 res.status(200).send(data)
             }else{
-                res.status(404).json("Nada que mostrar")
+                res.status(201).send([])
             }
         })
     }else if(data.post_id){
@@ -38,7 +39,7 @@ router.get('/',async (req,res) => {
                 if(data!=''){
                     res.status(201).send(data[0])
                 }else{
-                    res.status(404).json("No se encontró el post")
+                    res.status(404).send([])
                 }
             }).catch(e=>{
                 console.log(e)
