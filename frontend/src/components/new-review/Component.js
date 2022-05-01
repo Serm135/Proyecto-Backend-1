@@ -3,7 +3,7 @@ import "./style.scss"
 import {postReview} from "../../services/api";
 import {useSelector} from "react-redux";
 import {getUrl} from "../../services/apiSlice";
-import {getUser, setUser} from "../../services/userSlice";
+import {getUser} from "../../services/userSlice";
 import {SmartForm} from "../form";
 import {genNameFromPlaceHolder} from "../../utils/tools";
 

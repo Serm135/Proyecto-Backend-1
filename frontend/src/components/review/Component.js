@@ -22,7 +22,7 @@ const Component = ({data, showAuthor, showProduct}) => {
             setProductData(product)
         }
         fetch()
-    }, [])
+    }, [API_URL])
 
     const redirectReviewer = () => navigate(`/profile/${data.user_id}`)
     const redirectProduct = () => navigate(`/product/${data.product_id}`)

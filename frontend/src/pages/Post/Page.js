@@ -12,12 +12,12 @@ import {NewReview} from "../../components/new-review";
 
 const Page = () => {
     const navigate = useNavigate()
+    const params = useParams();
     const [productData, setProductData] = React.useState(undefined)
     const [ownerData, setOwnerData] = React.useState(undefined)
     const [reviewData, setReviewData] = React.useState(undefined)
     const [reqState, setReqState] = React.useState(undefined)
     const API_URL = useSelector(getUrl)
-    const params = useParams();
     const userData = useSelector(getUser);
 
     const fetch = async () => {
@@ -33,7 +33,7 @@ const Page = () => {
 
     React.useEffect(() => {
         fetch()
-    }, [])
+    }, [API_URL])
 
     if (!productData) {
         return <Spinner text={'Loading...'}/>

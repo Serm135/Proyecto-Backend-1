@@ -30,6 +30,7 @@ const Component = ({formInitData, formStructure, formButtons, onSubmit, onSucces
 
         if (!equalityResult) {
             setError("Inputted data does not match.")
+            return;
         }
 
         try {

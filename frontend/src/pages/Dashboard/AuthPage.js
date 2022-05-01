@@ -16,7 +16,7 @@ const Page = () => {
             setRecents(posts)
         }
         fetch()
-    }, [])
+    }, [API_URL])
 
     if (!recentPosts) {
         return <Spinner text={'Loading recent posts...'}/>

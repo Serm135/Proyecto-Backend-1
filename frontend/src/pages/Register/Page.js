@@ -8,7 +8,6 @@ import {genNameFromPlaceHolder} from "../../utils/tools";
 import {doRegister} from "../../services/api";
 import {getUrl} from "../../services/apiSlice";
 
-
 const Page = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()

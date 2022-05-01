@@ -9,6 +9,7 @@ header {
 
   .logo {
     width: 180px;
+    cursor: pointer;
   }
 
   .icons {
@@ -25,5 +26,10 @@ header {
     align-items: center;
     justify-content: center;
     border-radius: 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgb(var(--color-background-secondary));
+    }
   }
 }
