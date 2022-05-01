@@ -6,21 +6,28 @@ router.post('/register',async (req,res) => {
     const data = req.body
     console.log("Register")
     console.log(data)
-    if (data!='') {
-        const newuser = new User({
-            display_name: req.body.display_name,
-            username: req.body.username,
-            password: req.body.password
+    if (data.username && data.password && data.display_name) {
+        await User.find({username:data.username}).then(dato=>{
+            if(dato==''){
+                const newuser = new User({
+                    display_name: req.body.display_name,
+                    username: req.body.username,
+                    password: req.body.password
+                })
+                newuser.save().then(result =>{
+                    console.log("Éxito "+result)
+                    res.status(201).send(result)
+                }).catch(e=>{
+                    console.log(e)
+                    res.status(500).json({
+                        error:e
+                    })
+                })
+            }else{
+                res.status(404).json({message:'El usuario ya existe'})
+            }
         })
-        await newuser.save().then(result =>{
-            console.log("Éxito "+result)
-            res.status(201).send(result)
-        }).catch(e=>{
-            console.log(e)
-            res.status(500).json({
-                error:e
-            })
-        })
+        
     }else{
         res.status(500).json({message:'No Content'})
     }
