@@ -10,7 +10,7 @@ app.use(bodyParser.json())
 
 const mongoose = require('mongoose')
 mongoose.connect(
-    "mongodb+srv://pinilloss:proyectoback@cluster0.49scg.mongodb.net/cadito-db?retryWrites=true&w=majority"
+    "mongodb+srv://pinilloss:gokuque@cluster0.49scg.mongodb.net/cadito-db?retryWrites=true&w=majority"
     ).then(()=>{
         console.log('Connection is ok')
     }).catch((e)=>{
